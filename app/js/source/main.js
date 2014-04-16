@@ -14,18 +14,18 @@
     $('#start').click(startGame);
     $('#animate').click(animate);
     $('#grid').on('click', 'td', flip);
-    createTable();
+//    createTable();
   }
 
   function flip() {
 
   }
 
-  function createTable() {
-    for(var i=0; i<numRows; i++) {
-      addRow();
-    }
-  }
+  // function createTable() {
+  //   for(var i=0; i<numRows; i++) {
+  //     addRow();
+  //   }
+  // }
 
   function startGame() {
     // Start clock
@@ -33,22 +33,44 @@
     $('#timer').removeClass('timer-warning');
     clearInterval(timer);
     timer = setInterval(updateClock, 200);
+    $('tbody').empty();
 
     // Add cards by selecting images
+    addRow();
+    var $td = $('tbody > tr:nth-child(1) > td:nth-child(1)');
+    var $img = $('<img>');
+    $img.attr('src', '../media/1.png');
+    $td.append($img);
   }
 
 
-  function addRow() {
-    var $tr = $('<tr>');
-    var tds = [];
+  function getImg() {
+    var $td = $('<td>');
+    var $img = $('<img>');
+    var imgnum;
 
+    imgnum = getRandomImage();
+
+    $img.attr('src', '../media/'+imgnum+'.png');
+    $td.append($img);
+    return $td;
+  }
+
+  function getRandomImage() {
+    
+  }
+
+  function addRow() {
+//    var tds = [];
+    numRows=numRows;
+    var $tr = $('<tr>');
     for(var i=0; i<numCols; i++) {
-      tds.push('<td></td>');
-//      $img = placeImg();
-//      $img.attr('src', '../media/1.png');
-//      $tr.append($(tds[i]).append($img));
+      $tr.append(getImg());
+      debugger;
+//      $td = getImg();
+//      tds.push('<td></td>');
     }
-    $tr.append(tds);
+//    $tr.append(tds);
     $('tbody').append($tr);
   }
 
