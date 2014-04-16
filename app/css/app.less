@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
 body{
-  background-image: url('../media/bg.svg');
+  background-image: url('../media/a.svg');
   background-size: cover;
   background-attachment: fixed;
 }
@@ -51,4 +51,60 @@ html, button, input, select, textarea,
 
 .button-xlarge {
   font-size: 150%;
+}
+
+#board {
+  background-image: url('../media/shagcarpet.jpg');
+  background-size: cover;
+}
+
+#board img {
+  width: 48px;
+  box-shadow: 3px 3px 3px rgba(45,45,45,.8);
+  background-color: rgba(5,5,5,.8);
+  margin: 5px;
+}
+
+.container {
+  width: 200px;
+  height: 250px;
+  -webkit-perspective: 1000;
+}
+
+.flipper {
+  -webkit-transform-style: preserve-3d; // also does this to this element's children
+  -webkit-transition-duration: 1s;
+  position: relative;
+}
+
+.flipper, .front, .back {
+  width: 100%;
+  height:100%;
+  color: white;
+  font-size: 50px;
+}
+
+.front, .back {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  -webkit-backface-visibility: hidden;
+}
+
+.front {
+  background-color: red;
+  z-index: 1;
+}
+
+.back {
+  background-color: blue;
+  -webkit-transform: rotateY(180deg);
+}
+
+.rotate {
+  -webkit-transform: rotateY(180deg);
+}
+
+.timer-warning {
+  color: red;
 }
