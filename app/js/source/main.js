@@ -12,12 +12,11 @@
     createTable();
     layoutCards();
     $('#start').click(startGame);
-    $('#animate').click(animate);
     $('#grid').on('click', 'td', flip);
   }
 
   function flip() {
-
+    $('.flipper').toggleClass('rotate');
   }
 
   function startGame() {
@@ -36,10 +35,20 @@
   function setImage(i, imgNum) {
     var $cell;
     var $img = $('<img>');
+    var $img2= $('<img>');
+    var $div = $('<div>');
 
     $img.attr('src', '../media/' + imgNum + '.png');
+    $img2.attr('src', '../media/9.png');
+    $div.addClass('flipper');
+    $img.addClass('front');
+    $img2.addClass('back');
+    $div.append($img);
+    $div.append($img2);
+
     $cell = $($('tbody td')[i]);
-    $cell.append($img);
+    $cell.addClass('container');
+    $cell.append($div);
 
   }
 
@@ -51,7 +60,6 @@
     }
     $tr.append(tds);
     $('tbody').append($tr);
-
   }
 
   function createTable() {
@@ -88,7 +96,6 @@
     var rn;
     var a=[];
     var numCells = (numRows * numCols);
-
     while(a.length < numCells) {
       rn = Math.floor(numCells*Math.random());
       if(!inArray(rn,a)) {
@@ -110,8 +117,5 @@
     return false;
   }
 
-  function animate() {
-    $('.flipper').toggleClass('rotate');
-  }
 
 })();
