@@ -1,8 +1,6 @@
 (function() {
   'use strict';
 
-// $('#game').on('click', 'td', doSomething);
-
   $(document).ready(init);
 
   var timer;
@@ -14,72 +12,87 @@
     $('#start').click(startGame);
     $('#animate').click(animate);
     $('#grid').on('click', 'td', flip);
-//    createTable();
   }
 
   function flip() {
 
   }
 
-  // function createTable() {
-  //   for(var i=0; i<numRows; i++) {
-  //     addRow();
-  //   }
-  // }
-
   function startGame() {
     // Start clock
+    startClock();
+
+    // Add cards by selecting images
+    createTable();
+    layoutCards();
+  }
+
+
+  // function getRandomImage() {
+  //   var rn = Math.floor(10*Math.random());
+  //   return rn;
+  // }
+
+// $card = $('td')[i]
+// $card.append($img);
+
+  // function getImg() {
+  //   var $td = $('<td>');
+  //   var $img = $('<img>');
+  //   var imgNum = getRandomImage();
+  //
+  //   $img.attr('src', '../media/'+imgNum+'.png');
+  //   $td.append($img);
+  //   return $td;
+  // }
+
+  function layoutCards() {
+      var cellIndex = genRandomIndex();
+      for(var i=0; i< cellIndex.length; i++) {
+        setImage(i, cellIndex[i]);
+      }
+  }
+
+  function setImage(i, imgNum) {
+    var $cell;
+    var $img = $('<img>');
+
+    $img.attr('src', '../media/' + imgNum + '.png');
+    $cell = $($('tbody td')[i]);
+    $cell.append($img);
+
+  }
+
+  function addRow() {
+    var $tr = $('<tr>');
+    var tds = [];
+    for(var i=0; i<numCols; i++) {
+        tds.push('<td></td>');
+    }
+    $tr.append(tds);
+    $('tbody').append($tr);
+
+  }
+
+  function createTable() {
+    for(var i=0; i<numRows; i++) {
+      addRow();
+    }
+  }
+
+  function startClock() {
     clock = 60;
     $('#timer').removeClass('timer-warning');
     clearInterval(timer);
     timer = setInterval(updateClock, 200);
     $('tbody').empty();
 
-    // Add cards by selecting images
-    addRow();
-    var $td = $('tbody > tr:nth-child(1) > td:nth-child(1)');
-    var $img = $('<img>');
-    $img.attr('src', '../media/1.png');
-    $td.append($img);
   }
-
-
-  function getImg() {
-    var $td = $('<td>');
-    var $img = $('<img>');
-    var imgnum;
-
-    imgnum = getRandomImage();
-
-    $img.attr('src', '../media/'+imgnum+'.png');
-    $td.append($img);
-    return $td;
-  }
-
-  function getRandomImage() {
-    
-  }
-
-  function addRow() {
-//    var tds = [];
-    numRows=numRows;
-    var $tr = $('<tr>');
-    for(var i=0; i<numCols; i++) {
-      $tr.append(getImg());
-      debugger;
-//      $td = getImg();
-//      tds.push('<td></td>');
-    }
-//    $tr.append(tds);
-    $('tbody').append($tr);
-  }
-
 
   function updateClock() {
     clock--;
     if(clock===0){
-      clearInterval(timer);
-      timesUp();
+      stopClock();
     }
     if(clock===10) {
       $('#timer').addClass('timer-warning');
@@ -87,12 +100,35 @@
     $('#timer').text(clock);
   }
 
-
-
-  function timesUp() {
-
+  function stopClock() {
+    clearInterval(timer);
   }
 
+  function genRandomIndex() {
+    var rn;
+    var a=[];
+    var numCells = (numRows * numCols);
+
+    while(a.length < numCells) {
+      rn = Math.floor(numCells*Math.random());
+      if(!inArray(rn,a)) {
+        a.push(rn);
+      }
+    }
+    for(var i=0; i< numCells; i++) {
+      a[i] = Math.floor(a[i]/2);
+    }
+    return a;
+  }
+
+  function inArray(n, arr) {
+    for(var i=0; i<arr.length; i++) {
+      if(arr[i]===n) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   function animate() {
     $('.flipper').toggleClass('rotate');
