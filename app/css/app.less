@@ -1,9 +1,14 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
 body{
-//  background-image: url('../media/a.svg');
+  background-image: url('../media/bg.jpg');
   background-size: cover;
   background-attachment: fixed;
+}
+
+h1, h3 {
+  color: rgba(212,212,212,0.9);
+  margin-left: 30px;
 }
 
 html, button, input, select, textarea,
@@ -54,13 +59,16 @@ html, button, input, select, textarea,
 }
 
 #board {
-  background-image: url('../media/shagcarpet.jpg');
-  background-size: cover;
+  padding: 10px;
+}
+
+#board table {
+  margin: auto;
 }
 
 #board img {
-  box-shadow: 3px 3px 3px rgba(45,45,45,.8);
-  background-color: rgba(5,5,5,.8);
+  box-shadow: 5px -6px 5px rgba(91, 91, 91, 0.81);
+  background-color: rgba(44, 44, 44, 0.81);
   margin: 5px;
 }
 
@@ -104,6 +112,12 @@ html, button, input, select, textarea,
   -webkit-transform: rotateY(180deg);
 }
 
+
+#timer {
+  color: rgba(212,212,212,0.9);
+  font-size: 2em;
+}
+
 .timer-warning {
-  color: red;
+  color: red !important;
 }

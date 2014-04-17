@@ -9,6 +9,8 @@
   var numCols=5;
 
   function init() {
+    createTable();
+    layoutCards();
     $('#start').click(startGame);
     $('#animate').click(animate);
     $('#grid').on('click', 'td', flip);
@@ -19,10 +21,7 @@
   }
 
   function startGame() {
-    // Start clock
     startClock();
-
-    // Add cards by selecting images
     createTable();
     layoutCards();
   }
