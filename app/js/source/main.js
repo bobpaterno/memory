@@ -16,7 +16,8 @@
   }
 
   function flip() {
-    $('.flipper').toggleClass('rotate');
+    $(this.firstChild).toggleClass('flipper');
+    $(this.firstChild).toggleClass('rotate');
   }
 
   function startGame() {
@@ -40,7 +41,7 @@
 
     $img.attr('src', '../media/' + imgNum + '.png');
     $img2.attr('src', '../media/9.png');
-    $div.addClass('flipper');
+//    $div.addClass('flipper');
     $img.addClass('front');
     $img2.addClass('back');
     $div.append($img);
@@ -117,5 +118,19 @@
     return false;
   }
 
+
+// Matching
+/*
+
+var row = $(this).parent().index();
+var col = $(this).index();
+
+$(this).find('.back').css('background-image', 'url("./media/+idx+'.png")');
+$(this).find('.flipper').addClass('rotate');
+$(this).addClass('show');
+checkMatch();
+
+
+*/
 
 })();
