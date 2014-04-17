@@ -27,25 +27,6 @@
     layoutCards();
   }
 
-
-  // function getRandomImage() {
-  //   var rn = Math.floor(10*Math.random());
-  //   return rn;
-  // }
-
-// $card = $('td')[i]
-// $card.append($img);
-
-  // function getImg() {
-  //   var $td = $('<td>');
-  //   var $img = $('<img>');
-  //   var imgNum = getRandomImage();
-  //
-  //   $img.attr('src', '../media/'+imgNum+'.png');
-  //   $td.append($img);
-  //   return $td;
-  // }
-
   function layoutCards() {
       var cellIndex = genRandomIndex();
       for(var i=0; i< cellIndex.length; i++) {
