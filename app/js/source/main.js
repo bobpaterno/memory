@@ -7,75 +7,78 @@
   var clock;
   var numRows=4;
   var numCols=5;
+  var cards=[];
 
   function init() {
-    createTable();
-    layoutCards();
+    cards = shuffle();
     $('#start').click(startGame);
-    $('#grid').on('click', 'td', flip);
-  }
-
-  function flip() {
-    $(this.firstChild).toggleClass('flipper');
-    $(this.firstChild).toggleClass('rotate');
+    $('.card').click(flip);
   }
 
   function startGame() {
+    cards = shuffle();
+    clearBoard();
     startClock();
-    createTable();
-    layoutCards();
   }
 
-  function layoutCards() {
-      var cellIndex = genRandomIndex();
-      for(var i=0; i< cellIndex.length; i++) {
-        setImage(i, cellIndex[i]);
+  function flip() {
+    turnOverCard(this);
+    check4Match(this);
+    checkWin();
+  }
+
+  function check4Match(curr) {
+    var $flipped = $('.selected');
+    var card1 = $flipped[0];
+    var card2 = $flipped[1];
+    var img1 = $(card1).data('idx');
+    var img2 = $(card2).data('idx');
+
+    if ($flipped.length===2) {
+      if(cards[img1]===cards[img2]) { // if cards match
+        $flipped.addClass('matched');
       }
-  }
-
-  function setImage(i, imgNum) {
-    var $cell;
-    var $img = $('<img>');
-    var $img2= $('<img>');
-    var $div = $('<div>');
-
-    $img.attr('src', '../media/' + imgNum + '.png');
-    $img2.attr('src', '../media/9.png');
-//    $div.addClass('flipper');
-    $img.addClass('front');
-    $img2.addClass('back');
-    $div.append($img);
-    $div.append($img2);
-
-    $cell = $($('tbody td')[i]);
-    $cell.addClass('container');
-    $cell.append($div);
-
-  }
-
-  function addRow() {
-    var $tr = $('<tr>');
-    var tds = [];
-    for(var i=0; i<numCols; i++) {
-        tds.push('<td></td>');
+      else {
+        setTimeout(function(){
+            $flipped.find('.flipper').removeClass('rotate');
+            setTimeout(function() {
+                $(curr).find('.back').css('background-image', '');          
+              }, 700);
+          }, 700);      
+      }
+  
+      $flipped.removeClass('selected');
     }
-    $tr.append(tds);
-    $('tbody').append($tr);
+
   }
 
-  function createTable() {
-    for(var i=0; i<numRows; i++) {
-      addRow();
+  function checkWin() {
+    console.log($('.matched').length);
+    if($('.matched').length === numRows*numCols) {
+      stopClock(timer);
+      alert('winner!');
     }
+  }
+  
+  function turnOverCard(curr) {
+    var index = $(curr).data('idx');
+    var img = cards[index];
+    $(curr).find('.back').css('background-image', 'url("./media/'+img+'.png")'); // 'url("./media/"'+index+'".png")');
+    $(curr).find('.flipper').addClass('rotate');
+    $(curr).addClass('selected');    
+  }
+
+  function clearBoard() {
+    $('.matched').removeClass('matched');
+    $('.selected').removeClass('selected');
+    $('.flipper').removeClass('rotate');
   }
 
   function startClock() {
-    clock = 60;
+    clock = $('#timer').data('time')*1;
     $('#timer').removeClass('timer-warning');
     clearInterval(timer);
-    timer = setInterval(updateClock, 200);
-    $('tbody').empty();
-
+    timer = setInterval(updateClock, 608);
   }
 
   function updateClock() {
@@ -83,7 +86,7 @@
     if(clock===0){
       stopClock();
     }
-    if(clock===10) {
+    if(clock===20) {
       $('#timer').addClass('timer-warning');
     }
     $('#timer').text(clock);
@@ -93,7 +96,7 @@
     clearInterval(timer);
   }
 
-  function genRandomIndex() {
+  function shuffle() {
     var rn;
     var a=[];
     var numCells = (numRows * numCols);
@@ -118,19 +121,5 @@
     return false;
   }
 
-
-// Matching
-/*
-
-var row = $(this).parent().index();
-var col = $(this).index();
-
-$(this).find('.back').css('background-image', 'url("./media/+idx+'.png")');
-$(this).find('.flipper').addClass('rotate');
-$(this).addClass('show');
-checkMatch();
-
-
-*/
 
 })();

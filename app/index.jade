@@ -8,22 +8,22 @@ html(lang='en')
     link(rel='stylesheet', href='http://yui.yahooapis.com/pure/0.5.0-rc-1/grids-responsive-min.css')
     link(rel='stylesheet', href='./css/app.css')
   body
-    h1 Memory Game
+    #controls Memory game
+      button#start Press Start
+      #timer(data-time='99') 99
 
     .pure-g
-      .pure-u-1-2#board
-        table#grid
+      .pure-u-1
+        table#board
           tbody
+            - for(var i=0; i<4; i++)
+              tr
+                - for(var j=0; j<5; j++)
+                  td.card(data-idx=5*i+j)
+                    .flipper
+                      .front
+                      .back
 
-      .pure-u-1-5#buttons
-        button.pure-button.button-xlarge#start Start
-      .pure-u-1-5#timer 60
-
-    button#animate Animate
-    .container
-      .flipper
-        .front A
-        .back B
 
     script(src='./js/vendor/jquery-2.1.0.js')
     script(src='./js/source/main.js')

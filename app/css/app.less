@@ -6,10 +6,6 @@ body{
   background-attachment: fixed;
 }
 
-h1, h3 {
-  color: rgba(212,212,212,0.9);
-  margin-left: 30px;
-}
 
 html, button, input, select, textarea,
 .pure-g [class *= "pure-u"] {
@@ -26,98 +22,75 @@ html, button, input, select, textarea,
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
-.button-success {
-  background: rgb(82, 227, 101);
+#controls {
+  margin: 10px;
+  color:white;
 }
 
-.button-error {
-  background: rgb(210, 115, 78);
+#timer {
+  color: rgba(212,212,212,0.9);
+  font-size: 3em;
+  padding: 15px;
+}
+#start {
+  margin: 10px;
+  border-radius: 6px;
+  background-color: rgba(37,96,155,1);
+//  color: white;
 }
 
-.button-warning {
-  background: rgb(223, 117, 20);
-}
-
-.button-secondary {
-  background: rgba(108, 67, 223, 0.55);
-}
-
-.button-xsmall {
-  font-size: 50%;
-}
-
-.button-small {
-  font-size: 85%;
-}
-
-.button-large {
-  font-size: 110%;
-}
-
-.button-xlarge {
-  font-size: 150%;
+.timer-warning {
+  color: red !important;
 }
 
 #board {
-  padding: 10px;
-}
-
-#board table {
   margin: auto;
+  padding: 30px;
+  padding-bottom: 40px;
+  border: 3px solid rgba(27,37,217,0.95);
+  border-collapse: separate;
+  border-spacing: 12px;
+  border-radius: 12px;
+  background-color: rgba(0,0,38,0.93);
+  box-shadow: -2px 2px 34px rgba(180,190,255,0.5);
 }
 
-#board img {
-//  box-shadow: 5px -6px 5px rgba(91, 91, 91, 0.81);
-  background-color: rgba(44, 44, 44, 0.81);
-  margin: 5px;
-}
+#board td {
+  border: 2px solid rgba(27,37,217,0.95);
+  padding: 10px;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  box-shadow: -2px 3px 14px rgba(180,190,255,0.5);
+  background-color: rgba(103,113,255,0.9);
 
-.container {
-  width: 96px;
-  height: 96px;
-  -webkit-perspective: 1000;
-}
+    .flipper{
+    position: relative;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition-duration: 0.7s;
+    width: 100%;
+    height: 100%;
 
-.flipper {
-  -webkit-transform-style: preserve-3d; // also does this to this element's children
-  -webkit-transition-duration: 0.5s;
-  position: relative;
-}
+      .front, .back{
+        position: absolute;
+        -webkit-backface-visibility: hidden;
+        width: 100%;
+        height: 100%;
+      }
+  
+      .front{
+        z-index: 2;
+      }
+  
+      .back{
+        background-size: cover;
+        -webkit-transform: rotateY(180deg);
+      }
+    }
 
-.flipper, .front, .back {
-  width: 100%;
-  height:100%;
-//  color: white;
-//  font-size: 50px;
-}
-
-.front, .back {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  -webkit-backface-visibility: hidden;
-}
-
-.front {
-//  background-color: red;
-  z-index: 1;
-}
-
-.back {
-//  background-color: blue;
-  -webkit-transform: rotateY(180deg);
 }
 
 .rotate {
   -webkit-transform: rotateY(180deg);
 }
 
-
-#timer {
-  color: rgba(212,212,212,0.9);
-  font-size: 3em;
-}
-
-.timer-warning {
-  color: red !important;
-}
