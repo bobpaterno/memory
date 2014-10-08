@@ -26,10 +26,12 @@
   }
 
   function flip() {
-    if(isPlaying) {
-      turnOverCard(this);
-      check4Match(this);
-      checkWin();
+    if(!isMatched( $(this)) ) {
+      if(isPlaying) {
+        turnOverCard(this);
+        check4Match(this);
+        checkWin();
+      }
     }
   }
 
@@ -107,6 +109,10 @@
 
   function stopClock() {
     clearInterval(timer);
+  }
+
+  function isMatched(card) {
+    return $(card).hasClass('matched');
   }
 
   function shuffle() {
