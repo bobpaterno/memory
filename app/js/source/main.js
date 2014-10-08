@@ -8,6 +8,8 @@
   var numRows=4;
   var numCols=5;
   var cards=[];
+  var isWin = false;
+  var isPlaying = false;
 
   function init() {
     cards = shuffle();
@@ -16,15 +18,19 @@
   }
 
   function startGame() {
+    isWin = false;
+    isPlaying = true;
     cards = shuffle();
     clearBoard();
     startClock();
   }
 
   function flip() {
-    turnOverCard(this);
-    check4Match(this);
-    checkWin();
+    if(isPlaying) {
+      turnOverCard(this);
+      check4Match(this);
+      checkWin();
+    }
   }
 
   function check4Match(curr) {
@@ -42,11 +48,11 @@
         setTimeout(function(){
             $flipped.find('.flipper').removeClass('rotate');
             setTimeout(function() {
-                $(curr).find('.back').css('background-image', '');          
+                $(curr).find('.back').css('background-image', '');
               }, 700);
-          }, 700);      
+          }, 700);
       }
-  
+
       $flipped.removeClass('selected');
     }
 
@@ -57,15 +63,17 @@
     if($('.matched').length === numRows*numCols) {
       stopClock(timer);
       alert('winner!');
+      isWin = true;
+      isPlaying = false;
     }
   }
-  
+
   function turnOverCard(curr) {
     var index = $(curr).data('idx');
     var img = cards[index];
     $(curr).find('.back').css('background-image', 'url("./media/'+img+'.png")'); // 'url("./media/"'+index+'".png")');
     $(curr).find('.flipper').addClass('rotate');
-    $(curr).addClass('selected');    
+    $(curr).addClass('selected');
   }
 
   function clearBoard() {
@@ -78,18 +86,23 @@
     clock = $('#timer').data('time')*1;
     $('#timer').removeClass('timer-warning');
     clearInterval(timer);
-    timer = setInterval(updateClock, 608);
+    timer = setInterval(updateClock, 1608);
   }
 
   function updateClock() {
     clock--;
+    $('#timer').text(clock);
+
     if(clock===0){
       stopClock();
+      if(!isWin) {
+        alert('Loser!');
+        isPlaying = false;
+      }
     }
     if(clock===20) {
       $('#timer').addClass('timer-warning');
     }
-    $('#timer').text(clock);
   }
 
   function stopClock() {
