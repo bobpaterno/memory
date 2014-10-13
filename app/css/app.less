@@ -13,30 +13,44 @@ html, button, input, select, textarea,
   font-family: 'Open Sans', sans-serif;
 }
 
-.button-success,
-.button-error,
-.button-warning,
-.button-secondary {
-  color: white;
-  border-radius: 4px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+.button-game {
+  text-align: center;
+  font-size: 1.5em;
+  width: 90%;
 }
 
-#controls {
+#gametitle {
   margin: 10px;
   color:white;
+  text-align: center;
+  font-size: 1.5em;
 }
 
-#timer {
+.timer {
   color: rgba(212,212,212,0.9);
-  font-size: 3em;
+  font-size: 2.5em;
   padding: 15px;
+  text-align: center;
+}
+.timer-active {
+  text-shadow: 3px 2px 6px rgba(243, 203, 59, 0.8);
 }
 #start {
   margin: 10px;
   border-radius: 6px;
   background-color: rgba(37,96,155,1);
-//  color: white;
+}
+
+#level {
+  color: rgb(150,250,150);
+  text-shadow: 1px 1px 3px rgb(200,200,200);
+  text-align: center;
+}
+.controller {
+  margin-top: 3em;
+}
+.gameboard {
+  margin-top: 1em;
 }
 
 .timer-warning {
@@ -44,12 +58,11 @@ html, button, input, select, textarea,
 }
 
 #board {
-  margin: auto;
-  padding: 30px;
-  padding-bottom: 40px;
+  width: 478px;
+  padding: 0.8em;
   border: 3px solid rgba(27,37,217,0.95);
   border-collapse: separate;
-  border-spacing: 12px;
+  border-spacing: 0.5em;
   border-radius: 12px;
   background-color: rgba(0,0,38,0.93);
   box-shadow: -2px 2px 34px rgba(180,190,255,0.5);
@@ -58,11 +71,11 @@ html, button, input, select, textarea,
 
 #board td {
   border: 2px solid rgba(27,37,217,0.95);
-  padding: 10px;
+  padding: 0.5em;
   width: 60px;
   height: 60px;
   border-radius: 8px;
-  box-shadow: -2px 3px 14px rgba(180,190,255,0.5);
+  box-shadow: -2px 3px 12px rgba(180,190,255,0.5);
   background-color: rgba(103,113,255,0.9);
 
     .flipper{

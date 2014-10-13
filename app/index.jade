@@ -8,12 +8,14 @@ html(lang='en')
     link(rel='stylesheet', href='http://yui.yahooapis.com/pure/0.5.0-rc-1/grids-responsive-min.css')
     link(rel='stylesheet', href='./css/app.css')
   body
-    #controls Memory game
-      button#start Press Start
-      #timer(data-time='99') 99
-
     .pure-g
-      .pure-u-1
+      .pure-u-1-5.controller
+        #gametitle Retro Memory
+        button.button-game#start Press Start
+        #timer.timer(data-time='99') 99
+        #level
+
+      .pure-u-4-5.gameboard
         table#board
           tbody
             - for(var i=0; i<4; i++)

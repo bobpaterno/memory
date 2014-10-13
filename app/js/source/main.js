@@ -10,6 +10,7 @@
   var cards=[];
   var isWin = false;
   var isPlaying = false;
+  var DIFFICULTY = 1000; // milliseconds timer
 
   function init() {
     cards = shuffle();
@@ -20,18 +21,19 @@
   function startGame() {
     isWin = false;
     isPlaying = true;
+    $('#level').text( getLevel(DIFFICULTY) );
+    DIFFICULTY -= 100;
+    $('#timer').toggleClass('timer-active');
     cards = shuffle();
     clearBoard();
     startClock();
   }
 
   function flip() {
-    if(!isMatched( $(this)) ) {
-      if(isPlaying) {
-        turnOverCard(this);
-        check4Match(this);
-        checkWin();
-      }
+    if(!isMatched($(this)) && isPlaying ) {
+      turnOverCard(this);
+      check4Match(this);
+      checkWin();
     }
   }
 
@@ -48,20 +50,17 @@
       }
       else {
         setTimeout(function(){
-            $flipped.find('.flipper').removeClass('rotate');
-            setTimeout(function() {
-                $(curr).find('.back').css('background-image', '');
-              }, 700);
+          $flipped.find('.flipper').removeClass('rotate');
+          setTimeout(function() {
+              $(curr).find('.back').css('background-image', '');
           }, 700);
+        }, 700);
       }
-
       $flipped.removeClass('selected');
     }
-
   }
 
   function checkWin() {
-    console.log($('.matched').length);
     if($('.matched').length === numRows*numCols) {
       stopClock(timer);
       alert('winner!');
@@ -73,7 +72,7 @@
   function turnOverCard(curr) {
     var index = $(curr).data('idx');
     var img = cards[index];
-    $(curr).find('.back').css('background-image', 'url("./media/'+img+'.png")'); // 'url("./media/"'+index+'".png")');
+    $(curr).find('.back').css('background-image', 'url("./media/'+img+'.png")');
     $(curr).find('.flipper').addClass('rotate');
     $(curr).addClass('selected');
   }
@@ -88,7 +87,7 @@
     clock = $('#timer').data('time')*1;
     $('#timer').removeClass('timer-warning');
     clearInterval(timer);
-    timer = setInterval(updateClock, 1608);
+    timer = setInterval(updateClock, DIFFICULTY);
   }
 
   function updateClock() {
@@ -100,6 +99,7 @@
       if(!isWin) {
         alert('Loser!');
         isPlaying = false;
+        DIFFICULTY += 200;
       }
     }
     if(clock===20) {
@@ -140,5 +140,17 @@
     return false;
   }
 
-
+  function getLevel(difficulty) {
+    var str = '';
+    if(difficulty > 900) {
+      str = 'Easy';
+    }
+    else if(difficulty <= 900 && difficulty > 800) {
+      str = 'Medium';
+    }
+    else {
+      str = 'Hard';
+    }
+    return str;
+  }
 })();
