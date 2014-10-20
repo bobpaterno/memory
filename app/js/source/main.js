@@ -16,6 +16,7 @@
     cards = shuffle();
     $('#start').click(startGame);
     $('.card').click(flip);
+    $('#notice').attr('visibility', 'hidden');
   }
 
   function startGame() {
@@ -63,7 +64,7 @@
   function checkWin() {
     if($('.matched').length === numRows*numCols) {
       stopClock(timer);
-      alert('winner!');
+      displayNotice('Congratulations, you win!!');
       isWin = true;
       isPlaying = false;
     }
@@ -97,7 +98,7 @@
     if(clock===0){
       stopClock();
       if(!isWin) {
-        alert('Loser!');
+        displayNotice('Sorry, you lose.');
         isPlaying = false;
         DIFFICULTY += 200;
       }
@@ -152,5 +153,13 @@
       str = 'Hard';
     }
     return str;
+  }
+
+  function displayNotice(notice) {
+    var $notice = $('#notice');
+    $notice.text(notice);
+    $notice.fadeIn(500);
+    $notice.delay(3300);
+    $notice.fadeOut(1000);
   }
 })();
