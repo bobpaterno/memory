@@ -13,6 +13,7 @@ html {
 #notice {
   position: absolute;
   top: 0;
+  left: 0;
   width: 100%;
   margin: auto;
   height: 2em;
@@ -23,9 +24,10 @@ html {
   float: left;
   background-color: rgba(198, 223, 58, 0.75);
 }
+
+
 .container {
   width: 100%;
-
 
   .controller {
     width: 100%;
@@ -41,8 +43,9 @@ html {
     }
 
     .button-game {
-      margin: auto;
+      margin: 0px auto 2em auto;
     }
+
     #start {
       font-family: 'Source Code Pro', monospace;
       margin-left: auto;
@@ -84,77 +87,94 @@ html {
         cursor: pointer;
     }
 
-    .timer {
-      color: rgba(212,212,212,0.9);
-      font-size: 2.5em;
-      padding-top: 1em;
-    }
-    .timer-warning {
-      color: red;
-    }
-    .timer-active {
-      text-shadow: 3px 2px 6px rgba(243, 203, 59, 0.8);
-    }
   }
-}
+  .gameboard {
+    margin: 1.5em auto;
+    .dash {
+      width: 500px;
+      border-radius: 1em;
+      margin: 0 auto;
+      background-color: rgba(0,0,0,0.7);
+      padding: 1.5em;
+      text-align: center;
+      .label {
+        color: rgba(212,212,212,0.9);
+        font-size: 2em;
+        text-shadow: 3px 2px 6px rgba(243, 203, 59, 0.8);
+      }
 
-#level {
-  color: rgb(150,250,150);
-  text-shadow: 1px 1px 3px rgb(200,200,200);
-  text-align: center;
-}
-.gameboard {
-  margin-top: 1em;
-}
+      .button-reset {
+        display: inline;
+        padding: 0.5em;
+        background-color: rgba(37,96,155,1);
+        border-radius: 1em;
+      }
+      .timer {
+        display: inline;
+        color: rgba(212,212,212,0.9);
+        font-size: 1.5em;
+        padding: 0.5em;
+      }
+      .timer-warning {
+        color: red;
+      }
+      .timer-active {
+        text-shadow: 3px 2px 6px rgba(243, 203, 59, 0.8);
+      }
+    }
+    #board {
+      width: 478px;
+      margin: 0 auto;
+      padding: 1em;
+      border: 3px solid rgba(27,37,217,0.95);
+      border-collapse: separate;
+      border-spacing: 0.5em;
+      border-radius: 12px;
+      background-color: rgba(0,0,38,0.93);
+      box-shadow: -2px 2px 34px rgba(180,190,255,0.5);
+      background-image: url('../media/bgs.gif');
+    }
 
+    #board td {
+      border: 2px solid rgba(27,37,217,0.95);
+      padding: 0.5em;
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      box-shadow: -2px 3px 12px rgba(180,190,255,0.5);
+      background-color: rgba(103,113,255,0.9);
 
-#board {
-  width: 478px;
-  padding: 0.8em;
-  border: 3px solid rgba(27,37,217,0.95);
-  border-collapse: separate;
-  border-spacing: 0.5em;
-  border-radius: 12px;
-  background-color: rgba(0,0,38,0.93);
-  box-shadow: -2px 2px 34px rgba(180,190,255,0.5);
-  background-image: url('../media/bgs.gif');
-}
-
-#board td {
-  border: 2px solid rgba(27,37,217,0.95);
-  padding: 0.5em;
-  width: 60px;
-  height: 60px;
-  border-radius: 8px;
-  box-shadow: -2px 3px 12px rgba(180,190,255,0.5);
-  background-color: rgba(103,113,255,0.9);
-
-    .flipper{
-    position: relative;
-    -webkit-transform-style: preserve-3d;
-    -webkit-transition-duration: 0.7s;
-    width: 100%;
-    height: 100%;
-
-      .front, .back{
-        position: absolute;
-        -webkit-backface-visibility: hidden;
+        .flipper{
+        position: relative;
+        -webkit-transform-style: preserve-3d;
+        -webkit-transition-duration: 0.7s;
         width: 100%;
         height: 100%;
-      }
 
-      .front{
-        z-index: 2;
-      }
+          .front, .back{
+            position: absolute;
+            -webkit-backface-visibility: hidden;
+            width: 100%;
+            height: 100%;
+          }
 
-      .back{
-        background-size: cover;
-        -webkit-transform: rotateY(180deg);
-      }
+          .front{
+            z-index: 2;
+          }
+
+          .back{
+            background-size: cover;
+            -webkit-transform: rotateY(180deg);
+          }
+        }
+
+    }
+
+    .rotate {
+      -webkit-transform: rotateY(180deg);
     }
 
 }
 
-.rotate {
-  -webkit-transform: rotateY(180deg);
+
 }

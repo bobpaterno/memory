@@ -10,22 +10,25 @@
   var cards=[];
   var isWin = false;
   var isPlaying = false;
-  var DIFFICULTY = 1000; // milliseconds timer
+  var DIFFICULTY = 650; // milliseconds timer
 
   function init() {
     cards = shuffle();
     $('#start').click(startGame);
     $('.card').click(flip);
+    $('.button-reset').click(startGame);
     $('#notice').attr('visibility', 'hidden');
+    $('.gameboard').css('display', 'none');
   }
 
   function startGame() {
     isWin = false;
     isPlaying = true;
-    $('#level').text( getLevel(DIFFICULTY) );
-    DIFFICULTY -= 100;
     $('#timer').toggleClass('timer-active');
     cards = shuffle();
+    $('.gameboard').delay(150);
+    $('.controller').fadeOut(500);
+    $('.gameboard').fadeIn(250);
     clearBoard();
     startClock();
   }
@@ -79,9 +82,7 @@
   }
 
   function clearBoard() {
-    $('.matched').removeClass('matched');
-    $('.selected').removeClass('selected');
-    $('.flipper').removeClass('rotate');
+    $('.matched, .selected, .flipper').removeClass('matched selected rotate');
   }
 
   function startClock() {
@@ -100,7 +101,6 @@
       if(!isWin) {
         displayNotice('Sorry, you lose.');
         isPlaying = false;
-        DIFFICULTY += 200;
       }
     }
     if(clock===20) {
@@ -139,20 +139,6 @@
       }
     }
     return false;
-  }
-
-  function getLevel(difficulty) {
-    var str = '';
-    if(difficulty > 900) {
-      str = 'Easy';
-    }
-    else if(difficulty <= 900 && difficulty > 800) {
-      str = 'Medium';
-    }
-    else {
-      str = 'Hard';
-    }
-    return str;
   }
 
   function displayNotice(notice) {
